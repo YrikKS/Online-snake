@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--    <style name="TitleStyle" parent="Widget.AppCompat.TextView">-->
+<!--        <item name="textFillColor">#00E676</item>-->
+<!--        <item name="android:textSize">40</item>-->
+<!--        <item name="android:textColor">#00BFA5</item>-->
+<!--        <item name="android:fontFamily"></item>-->
+
+<!--        <item name="textFillColor"-->
+<!--    </style>-->
+    <style name="SettingLittleText" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_marginStart">80dp</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="SettingLittleEditText" parent="Widget.AppCompat.EditText">
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="SettingLargeText" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="TitleText" parent="Widget.AppCompat.TextView">
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">30sp</item>
+    </style>
+
+</resources>

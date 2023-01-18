@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/menuFragment">
+
+    <fragment
+        android:id="@+id/menuFragment"
+        android:name="ru.nsu.snake.menu.MenuFragment"
+        android:label="fragment_menu"
+        tools:layout="@layout/fragment_menu" >
+        <action
+            android:id="@+id/action_menuFragment_to_newGameSettingsFragment"
+            app:destination="@id/newGameSettingsFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_connectGameFragment"
+            app:destination="@id/connectGameFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newGameSettingsFragment"
+        android:name="ru.nsu.snake.newGameSettings.NewGameSettingsFragment"
+        android:label="fragment_new_game_settings"
+        tools:layout="@layout/fragment_new_game_settings" />
+    <fragment
+        android:id="@+id/connectGameFragment"
+        android:name="ru.nsu.snake.connectGame.ConnectGameFragment"
+        android:label="fragment_connect_game"
+        tools:layout="@layout/fragment_connect_game" />
+</navigation>
