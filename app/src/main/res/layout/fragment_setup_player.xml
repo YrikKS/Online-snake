@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".setupPlayer.SetupPlayerFragment">
+
+    <TextView
+        android:id="@+id/player_color"
+        style="@style/SettingLargeText"
+        android:layout_width="147dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="108dp"
+        android:text="@string/player_color"
+        android:textSize="23sp"
+        app:fontFamily="sans-serif-black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:textAllCaps="false" />
+
+    <RadioGroup
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:checkedButton="@id/player_color_5"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/player_color">
+
+        <RadioButton
+            android:id="@+id/player_color_1"
+            style="@style/ColorRadioButton" />
+
+        <RadioButton
+            android:id="@+id/player_color_2"
+            style="@style/ColorRadioButton" />
+
+        <RadioButton
+            android:id="@+id/player_color_3"
+            style="@style/ColorRadioButton" />
+
+        <RadioButton
+            android:id="@+id/player_color_4"
+            style="@style/ColorRadioButton" />
+
+        <RadioButton
+            android:id="@+id/player_color_5"
+            style="@style/ColorRadioButton" />
+    </RadioGroup>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,18 +10,21 @@
     <string name="button_exit">Exit</string>
 
     <!--    new game fragment   -->
-    <string name="title_new_game_settings">Settings game</string>
+    <string name="title_new_game_settings">Game settings</string>
     <string name="first_block_settings">Map settings</string>
     <string name="first_block_first_setting">Map height</string>
     <string name="first_block_second_setting">Map width</string>
     <string name="initial_size_map">10</string>
+    <string name="button_next_stage">Next</string>
 
     <string name="second_block_settings">Other settings</string>
     <string name="second_block_first_setting">Static count food</string>
     <string name="initial_static_food">1</string>
     <string name="second_block_second_setting">Game speed</string>
-    <string name="initial_speed_game">10</string>
+    <string name="initial_speed_game">1000</string>
 
+    <!--    connect fragment const -->
+    <string name="title_connect_game">Connect game</string>
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
     <string name="sync_header">Sync</string>
@@ -36,6 +39,7 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="player_color">Player color</string>
 
     <!--  code constants  -->
 </resources>

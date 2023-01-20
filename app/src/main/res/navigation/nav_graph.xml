@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/menuFragment"
         android:name="ru.nsu.snake.menu.MenuFragment"
-        android:label="fragment_menu"
-        tools:layout="@layout/fragment_menu" >
+        android:label="@string/menu_title"
+        tools:layout="@layout/fragment_menu">
         <action
             android:id="@+id/action_menuFragment_to_newGameSettingsFragment"
             app:destination="@id/newGameSettingsFragment" />
@@ -20,11 +20,24 @@
     <fragment
         android:id="@+id/newGameSettingsFragment"
         android:name="ru.nsu.snake.newGameSettings.NewGameSettingsFragment"
-        android:label="fragment_new_game_settings"
-        tools:layout="@layout/fragment_new_game_settings" />
+        android:label="@string/title_new_game_settings"
+        tools:layout="@layout/fragment_new_game_settings" >
+        <action
+            android:id="@+id/action_newGameSettingsFragment_to_setupPlayerFragment"
+            app:destination="@id/setupPlayerFragment" />
+    </fragment>
     <fragment
         android:id="@+id/connectGameFragment"
         android:name="ru.nsu.snake.connectGame.ConnectGameFragment"
-        android:label="fragment_connect_game"
-        tools:layout="@layout/fragment_connect_game" />
+        android:label="@string/title_connect_game"
+        tools:layout="@layout/fragment_connect_game" >
+        <action
+            android:id="@+id/action_connectGameFragment_to_setupPlayerFragment"
+            app:destination="@id/setupPlayerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/setupPlayerFragment"
+        android:name="ru.nsu.snake.setupPlayer.SetupPlayerFragment"
+        android:label="Color settings"
+        tools:layout="@layout/fragment_setup_player" />
 </navigation>

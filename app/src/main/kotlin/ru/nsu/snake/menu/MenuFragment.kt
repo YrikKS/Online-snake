@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import ru.nsu.snake.Constants
-import ru.nsu.snake.MainActivity
 import ru.nsu.snake.R
 import ru.nsu.snake.databinding.FragmentMenuBinding
 
@@ -23,7 +22,6 @@ class MenuFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         Log.i(Constants.logKey, "menu fragment create")
-
         _binding = FragmentMenuBinding.inflate(inflater, container, false)
         setupActionButtons()
         return binding.root
@@ -32,7 +30,6 @@ class MenuFragment : Fragment() {
     override fun onResume() {
         Log.i(Constants.logKey, "menu fragment on resume")
         super.onResume()
-        (activity as MainActivity).setTitle(getString(R.string.menu_title))
     }
 
     override fun onDestroyView() {

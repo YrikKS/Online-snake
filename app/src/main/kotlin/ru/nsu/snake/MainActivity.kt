@@ -9,8 +9,6 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
-import me.ippolitov.fit.snakes.SnakesProto
-import me.ippolitov.fit.snakes.gamePlayer
 import ru.nsu.snake.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -56,10 +54,6 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
-    }
-
-    fun setTitle(title: String) {
-        binding.toolbar.title = title
     }
 
 }

@@ -7,34 +7,65 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import ru.nsu.snake.Constants
-import ru.nsu.snake.MainActivity
 import ru.nsu.snake.R
+import ru.nsu.snake.databinding.FragmentNewGameSettingsBinding
 
 class NewGameSettingsFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = NewGameSettingsFragment()
+    private lateinit var viewModel: NewGameSettingsViewModel
+    private val editsTextContainer: EditsTextContainer by lazy {
+        EditsTextContainer(this.viewLifecycleOwner)
     }
 
-    private lateinit var viewModel: NewGameSettingsViewModel
+    private var _binding: FragmentNewGameSettingsBinding? = null
+    private val binding
+        get() = _binding!!
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_new_game_settings, container, false)
+    ): View {
+        Log.i(Constants.logKey, "create view game settings")
+        _binding = FragmentNewGameSettingsBinding.inflate(inflater, container, false)
+        return binding.root
     }
+
 
     override fun onStart() {
         super.onStart()
         viewModel = ViewModelProvider(this)[NewGameSettingsViewModel::class.java]
+        confEditText()
+        confButtonNext()
     }
 
-    override fun onResume() {
-        Log.i(Constants.logKey, "settings fragment on resume")
-        super.onResume()
-        (activity as MainActivity).setTitle(getString(R.string.title_new_game_settings))
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
+    private fun confEditText() {
+        editsTextContainer.addToSet(binding.mapHeightPlain, viewModel.mapHeight) {
+            viewModel.setMapHeight(it)
+        }
+        editsTextContainer.addToSet(binding.mapWidthPlain, viewModel.mapWidth) {
+            viewModel.setMapWidth(it)
+        }
+        editsTextContainer.addToSet(binding.countFoodPlain, viewModel.countFood) {
+            viewModel.setCountFood(it)
+        }
+        editsTextContainer.addToSet(binding.gameSpeedPlain, viewModel.gameSpeed) {
+            viewModel.setGameSpeed(it)
+        }
+    }
+
+    private fun confButtonNext() {
+        binding.nextSettings.setOnClickListener {
+            editsTextContainer.looseFocusAtAll()
+            findNavController().navigate(R.id.action_newGameSettingsFragment_to_setupPlayerFragment)
+        }
+    }
 }
