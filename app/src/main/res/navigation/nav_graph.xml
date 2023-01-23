@@ -39,5 +39,14 @@
         android:id="@+id/setupPlayerFragment"
         android:name="ru.nsu.snake.setupPlayer.SetupPlayerFragment"
         android:label="Color settings"
-        tools:layout="@layout/fragment_setup_player" />
+        tools:layout="@layout/fragment_setup_player" >
+        <action
+            android:id="@+id/action_setupPlayerFragment_to_gameFragment"
+            app:destination="@id/gameFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameFragment"
+        android:name="ru.nsu.snake.game.GameFragment"
+        android:label="Game"
+        tools:layout="@layout/fragment_game" />
 </navigation>

@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.Snake" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimary">@color/ic_channel_background</item>
         <item name="colorPrimaryVariant">@color/primary_dark</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="android:navigationBarColor">@color/navigation_bar</item>

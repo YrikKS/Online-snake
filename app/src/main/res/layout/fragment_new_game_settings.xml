@@ -244,6 +244,7 @@
         android:layout_marginBottom="60dp"
         android:text="@string/button_next_stage"
         android:textAllCaps="false"
+        android:textColor="@color/menu_button"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
