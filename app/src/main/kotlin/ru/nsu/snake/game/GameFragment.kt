@@ -9,12 +9,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TableRow
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import ru.nsu.snake.Constants
 import ru.nsu.snake.R
 import ru.nsu.snake.databinding.FragmentGameBinding
 
 class GameFragment : Fragment() {
-    private val viewModel: GameViewModel by viewModels()
+    private var viewModel: GameViewModel? = null// by viewModels()
     
     private var _binding: FragmentGameBinding? = null
     private val binding
@@ -30,7 +31,7 @@ class GameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        viewModel = ViewModelProvider(this)[GameViewModel::class.java]
+        viewModel = ViewModelProvider(this)[GameViewModel::class.java]
         confGameMap()
     }
 

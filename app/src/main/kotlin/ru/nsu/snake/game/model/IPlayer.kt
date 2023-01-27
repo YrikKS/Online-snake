@@ -7,10 +7,11 @@ import ru.nsu.snake.game.model.gameObjects.interfaceObjects.ISnake
 
 interface IPlayer {
     var snake: ISnake
+    var snakeState: ModelSnakeStatus
+
     val idPlayer: Int
     val playerName: String
     var statusPLayer: ModelPlayerType?
-    var snakeState: ModelSnakeStatus
     var ipAddres: String?
     var port: Int?
     var nodeRole: ModelNodeRole

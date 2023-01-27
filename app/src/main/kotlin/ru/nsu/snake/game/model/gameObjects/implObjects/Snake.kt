@@ -1,28 +1,28 @@
 package ru.nsu.snake.game.model.gameObjects.implObjects
 
 import ru.nsu.snake.Constants
-import ru.nsu.snake.game.model.gameObjects.enumForGameObjects.Direction
+import ru.nsu.snake.game.model.gameObjects.enumForGameObjects.ModelDirection
 import ru.nsu.snake.game.model.gameObjects.interfaceObjects.ICoord
-import ru.nsu.snake.game.model.gameObjects.interfaceObjects.IMapGame
+import ru.nsu.snake.game.model.gameObjects.interfaceObjects.IMapConfig
 import ru.nsu.snake.game.model.gameObjects.interfaceObjects.ISnake
 
 abstract class AbstractSnake : MapObject(), ISnake
 
 class Snake(
-    direction: Direction,
-    private val map: IMapGame,
+    direction: ModelDirection,
+    private val map: IMapConfig,
     override var listOfField: MutableList<ICoord>
 ) :
     AbstractSnake() {
-    override var _direction: Direction = direction
+    override var modelDirection: ModelDirection = direction
         set(value) {
             val newCoordAfterMove = listOfField[Constants.INDEX_HEAD_SNAKE].newCopy().also {
                 it.moveCoord(value)
-                moveThroughWalls(it)
+                it.moveThroughWalls(mapConfig = map)
             }
             field =
                 if (newCoordAfterMove.coordEquals(listOfField[Constants.INDEX_SECOND_BLOCK_SNAKE])) {
-                    _direction
+                    modelDirection
                 } else {
                     value
                 }
@@ -34,11 +34,12 @@ class Snake(
             listOfField[Constants.INDEX_HEAD_SNAKE].y
         )
         when (direction) {
-            Direction.UP -> listOfField.add(tipSnake.apply { moveCoord(Direction.DOWN) })
-            Direction.DOWN -> listOfField.add(tipSnake.apply { moveCoord(Direction.UP) })
-            Direction.LEFT -> listOfField.add(tipSnake.apply { moveCoord(Direction.RIGHT) })
-            Direction.RIGHT -> listOfField.add(tipSnake.apply { moveCoord(Direction.LEFT) })
+            ModelDirection.UP -> listOfField.add(tipSnake.apply { moveCoord(ModelDirection.DOWN) })
+            ModelDirection.DOWN -> listOfField.add(tipSnake.apply { moveCoord(ModelDirection.UP) })
+            ModelDirection.LEFT -> listOfField.add(tipSnake.apply { moveCoord(ModelDirection.RIGHT) })
+            ModelDirection.RIGHT -> listOfField.add(tipSnake.apply { moveCoord(ModelDirection.LEFT) })
         }
+        listOfField[Constants.INDEX_SECOND_BLOCK_SNAKE].moveThroughWalls(mapConfig = map)
     }
 
     override var previousCoordTip: ICoord = Coord(listOfField.last().x, listOfField.last().y)
@@ -53,28 +54,9 @@ class Snake(
             listOfField[index].y = listOfField[index - 1].y
         }
 
-        listOfField[Constants.INDEX_HEAD_SNAKE].moveCoord(_direction)
+        listOfField[Constants.INDEX_HEAD_SNAKE].moveCoord(modelDirection)
         listOfField[Constants.INDEX_HEAD_SNAKE].also {
-            moveThroughWalls(it)
-        }
-    }
-
-    private fun moveThroughWalls(coord: ICoord) {
-        when {
-            coord.y < 0 -> {
-                coord.y = map.sizeY - 1
-            }
-            coord.y >= map.sizeY -> {
-                coord.y = 0
-            }
-        }
-        when {
-            coord.x < 0 -> {
-                coord.x = map.sizeX - 1
-            }
-            coord.x >= map.sizeX -> {
-                coord.x = 0
-            }
+            it.moveThroughWalls(mapConfig = map)
         }
     }
 

@@ -1,18 +1,16 @@
 package ru.nsu.snake.game.model.gameObjects.implObjects
 
 import ru.nsu.snake.game.model.gameObjects.enumForGameObjects.TypeField
+import ru.nsu.snake.game.model.gameObjects.interfaceObjects.IMapConfig
 import ru.nsu.snake.game.model.gameObjects.interfaceObjects.IMapGame
 import ru.nsu.snake.game.model.gameObjects.interfaceObjects.IMapObject
 
 data class GameMap(
-    override val sizeX: Int,
-    override val sizeY: Int,
-    override val gameSpeed: Int,
-    override val countFood: Int
+    override val mapConfig: IMapConfig
 ) : IMapGame {
 
-    override val map = Array(sizeY) {
-        Array(sizeX) {
+    override val map = Array(mapConfig.sizeY) {
+        Array(mapConfig.sizeX) {
             mutableListOf(TypeField.EMPTY)
         }
     }

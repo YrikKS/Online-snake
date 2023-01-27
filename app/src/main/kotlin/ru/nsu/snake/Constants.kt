@@ -13,4 +13,7 @@ object Constants {
     const val sizeReceiverArray = 4096
     const val INDEX_HEAD_SNAKE = 0
     const val INDEX_SECOND_BLOCK_SNAKE = 1
+
+    const val IP_ADDRESS = "224.0.0.23"
+    const val port = 7777
 }
