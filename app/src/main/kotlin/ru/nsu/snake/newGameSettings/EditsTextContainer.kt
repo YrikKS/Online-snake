@@ -1,5 +1,6 @@
 package ru.nsu.snake.newGameSettings
 
+import android.view.KeyEvent
 import android.widget.EditText
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
@@ -30,6 +31,13 @@ class EditsTextContainer(private val lifecycle: LifecycleOwner) {
                 focusEvent(widget.text.toString())
             }
         }
+        widget.setOnKeyListener { v, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                focusEvent(widget.text.toString())
+                return@setOnKeyListener true
+            }
+            false
+        }
     }
 
     fun looseFocusAtAll() {
@@ -37,4 +45,5 @@ class EditsTextContainer(private val lifecycle: LifecycleOwner) {
             it.first.clearFocus()
         }
     }
+
 }

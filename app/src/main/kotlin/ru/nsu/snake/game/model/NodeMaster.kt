@@ -3,12 +3,12 @@ package ru.nsu.snake.game.model
 import ru.nsu.snake.game.model.gameObjects.enumForGameObjects.StatusGameObj
 import ru.nsu.snake.game.model.gameObjects.implObjects.GameMap
 import ru.nsu.snake.game.model.gameObjects.implObjects.GeneratorGameObjects
-import ru.nsu.snake.game.model.gameObjects.implObjects.MapObject
 import ru.nsu.snake.game.model.gameObjects.interfaceObjects.IFood
 import ru.nsu.snake.game.model.gameObjects.interfaceObjects.IMapConfig
-import ru.nsu.snake.game.model.gameObjects.interfaceObjects.IMapGame
+import ru.nsu.snake.game.model.interfaceModel.IGameMaster
+import ru.nsu.snake.game.model.interfaceModel.IPlayer
 
-class GameMaster(
+class NodeMaster(
     var mapConfig: IMapConfig,
     var listUsers: MutableList<IPlayer>,
     var listFood: MutableList<IFood>

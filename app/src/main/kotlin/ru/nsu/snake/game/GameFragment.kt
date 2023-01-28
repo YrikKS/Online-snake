@@ -2,24 +2,41 @@ package ru.nsu.snake.game
 
 import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TableRow
-import androidx.fragment.app.viewModels
+import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import kotlinx.coroutines.launch
 import ru.nsu.snake.Constants
 import ru.nsu.snake.R
 import ru.nsu.snake.databinding.FragmentGameBinding
+import ru.nsu.snake.game.model.gameObjects.enumForGameObjects.ModelDirection
+import ru.nsu.snake.setupPlayer.SetupPlayerFragmentArgs
+
 
 class GameFragment : Fragment() {
     private var viewModel: GameViewModel? = null// by viewModels()
-    
+
     private var _binding: FragmentGameBinding? = null
     private val binding
         get() = _binding!!
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+//        val callback: OnBackPressedCallback =
+//            object : OnBackPressedCallback(true /* enabled by default */) {
+//                override fun handleOnBackPressed() {
+//                    findNavController().navigate(R.id.action_gameFragment_to_menuFragment)
+//                }
+//            }
+//        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,8 +48,11 @@ class GameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this)[GameViewModel::class.java]
-        confGameMap()
+        viewModel =
+            MyViewModelProvider(SetupPlayerFragmentArgs.fromBundle(requireArguments()).settings).create(
+                GameViewModel::class.java
+            )
+        confButtons()
     }
 
     private fun confGameMap() {
@@ -54,6 +74,29 @@ class GameFragment : Fragment() {
                 }
             }
             binding.gameMap.addView(row)
+        }
+    }
+
+    private fun confButtons() {
+        binding.moveUp.setOnClickListener {
+            lifecycleScope.launch {
+                viewModel?.steer(ModelDirection.UP)
+            }
+        }
+        binding.moveDown.setOnClickListener {
+            lifecycleScope.launch {
+                viewModel?.steer(ModelDirection.DOWN)
+            }
+        }
+        binding.moveLeft.setOnClickListener {
+            lifecycleScope.launch {
+                viewModel?.steer(ModelDirection.LEFT)
+            }
+        }
+        binding.moveRight.setOnClickListener {
+            lifecycleScope.launch {
+                viewModel?.steer(ModelDirection.RIGHT)
+            }
         }
     }
 

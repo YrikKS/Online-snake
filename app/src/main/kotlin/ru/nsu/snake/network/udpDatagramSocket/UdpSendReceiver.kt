@@ -8,11 +8,13 @@ import ru.nsu.snake.network.IReceiver
 import ru.nsu.snake.network.ISender
 import ru.nsu.snake.network.ReceiverData
 import java.net.DatagramPacket
+import java.net.DatagramSocket
 import java.net.InetAddress
 
 class UdpSendReceiver(address: String, port: Int) : UdpDatagramSock(address, port), ISender,
     IReceiver {
 
+    private var sock = DatagramSocket(Constants.PORT_PLAYER)
     override suspend fun sendData(
         gameMessage: SnakesProto.GameMessage,
         receiverIp: String,
@@ -21,7 +23,7 @@ class UdpSendReceiver(address: String, port: Int) : UdpDatagramSock(address, por
         withContext(Dispatchers.IO) {
             val byteArray =
                 SnakesProto.GameMessage.newBuilder().mergeFrom(gameMessage).build().toByteArray()
-            dataSock.send(
+            sock.send(
                 DatagramPacket(
                     byteArray,
                     byteArray.size,
@@ -38,6 +40,7 @@ class UdpSendReceiver(address: String, port: Int) : UdpDatagramSock(address, por
         withContext(Dispatchers.IO) {
             dataSock.receive(dataPackage)
         }
+        println(dataPackage.address.hostName)
         return ReceiverData(
             dataPackage.address.hostName, dataPackage.port,
             SnakesProto.GameMessage.parseFrom(dataPackage.data)

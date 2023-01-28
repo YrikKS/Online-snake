@@ -1,4 +1,4 @@
-package ru.nsu.snake.game.model
+package ru.nsu.snake.game.model.interfaceModel
 
 interface IGameMaster {
 

@@ -16,6 +16,8 @@ import ru.nsu.snake.game.model.enumsForModel.ModelSnakeStatus
 import ru.nsu.snake.game.model.gameObjects.enumForGameObjects.ModelDirection
 import ru.nsu.snake.game.model.gameObjects.interfaceObjects.IFood
 import ru.nsu.snake.game.model.gameObjects.interfaceObjects.IMapConfig
+import ru.nsu.snake.game.model.interfaceModel.IGameConf
+import ru.nsu.snake.game.model.interfaceModel.IPlayer
 
 class AdapterSender(private val modelSenderId: Int) {
     //    val multicastSendReciver = MulticastSendReciver(Constants.IP_ADDRESS, Constants.port)
@@ -29,7 +31,7 @@ class AdapterSender(private val modelSenderId: Int) {
         this.senderId = modelSenderId
     }
 
-    fun convertToGameMsg(
+    fun createGameMsg(
         modelPlayers: MutableList<IPlayer>,
         modelFoods: MutableList<IFood>
     ) = gameMessage {
@@ -56,7 +58,7 @@ class AdapterSender(private val modelSenderId: Int) {
         this.msgSeq = ++modelMsgSqn
     }
 
-    fun convertToRotationMsg(modelDirection: ModelDirection) = gameMessage {
+    fun createRotationMsg(modelDirection: ModelDirection) = gameMessage {
         steer = steerMsg {
             this.direction = ModelDirection.converFromModelToNet(modelDirection)
         }

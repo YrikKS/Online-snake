@@ -8,8 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import ru.nsu.snake.Constants
 import ru.nsu.snake.R
+import ru.nsu.snake.argForFragments.ArgForNewGameToModel
 import ru.nsu.snake.databinding.FragmentNewGameSettingsBinding
 import ru.nsu.snake.databinding.FragmentSetupPlayerBinding
 
@@ -26,9 +28,6 @@ class SetupPlayerFragment : Fragment() {
     ): View {
         Log.i(Constants.logKey, "create view player setup")
         _binding = FragmentSetupPlayerBinding.inflate(inflater, container, false)
-        binding.buttonStartGame.setOnClickListener {
-            findNavController().navigate(R.id.action_setupPlayerFragment_to_gameFragment)
-        }
         return binding.root
     }
 
@@ -36,5 +35,19 @@ class SetupPlayerFragment : Fragment() {
         super.onStart()
         viewModel = ViewModelProvider(this)[SetupPlayerViewModel::class.java]
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        confButtons()
+    }
+
+    private fun confButtons() {
+        binding.buttonStartGame.setOnClickListener {
+            val args = SetupPlayerFragmentArgs.fromBundle(requireArguments()).settings
+            val action = SetupPlayerFragmentDirections.actionSetupPlayerFragmentToGameFragment(args)
+            findNavController().navigate(action)
+        }
+    }
+
 
 }

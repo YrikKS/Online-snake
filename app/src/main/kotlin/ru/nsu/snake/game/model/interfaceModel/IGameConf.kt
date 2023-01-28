@@ -1,4 +1,4 @@
-package ru.nsu.snake.game.model
+package ru.nsu.snake.game.model.interfaceModel
 
 import ru.nsu.snake.game.model.gameObjects.interfaceObjects.IMapConfig
 

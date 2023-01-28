@@ -43,10 +43,20 @@
         <action
             android:id="@+id/action_setupPlayerFragment_to_gameFragment"
             app:destination="@id/gameFragment" />
+        <argument
+            android:name="settings"
+            app:argType="ru.nsu.snake.argForFragments.ArgForNewGameToModel" />
     </fragment>
     <fragment
         android:id="@+id/gameFragment"
         android:name="ru.nsu.snake.game.GameFragment"
         android:label="Game"
-        tools:layout="@layout/fragment_game" />
+        tools:layout="@layout/fragment_game" >
+        <argument
+            android:name="settings"
+            app:argType="ru.nsu.snake.argForFragments.ArgForNewGameToModel" />
+        <action
+            android:id="@+id/action_gameFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
+    </fragment>
 </navigation>

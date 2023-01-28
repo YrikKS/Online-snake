@@ -8,9 +8,10 @@ import ru.nsu.snake.network.IReceiver
 import ru.nsu.snake.network.ISender
 import ru.nsu.snake.network.ReceiverData
 import java.net.DatagramPacket
+import java.net.DatagramSocket
 import java.net.InetAddress
 
-class MulticastSendReciver(address: String, port: Int) :
+class MulticastSendReceiver(address: String, port: Int) :
     UdpMulticastSock(address, port),
     ISender,
     IReceiver {
@@ -21,8 +22,9 @@ class MulticastSendReciver(address: String, port: Int) :
         receiverPort: Int
     ) {
         withContext(Dispatchers.IO) {
-            var byteArray =
+            val byteArray =
                 SnakesProto.GameMessage.newBuilder().mergeFrom(gameMessage).build().toByteArray()
+            println(byteArray.size)
             dataSock.send(
                 DatagramPacket(
                     byteArray,
@@ -41,8 +43,8 @@ class MulticastSendReciver(address: String, port: Int) :
             dataSock.receive(dataPackage)
         }
         return ReceiverData(
-            dataPackage.address.hostName, dataPackage.port,
-            SnakesProto.GameMessage.parseFrom(dataPackage.data)
+            dataPackage.address.toString().drop(1), dataPackage.port,
+            SnakesProto.GameMessage.parseFrom(dataPackage.data.copyOf(dataPackage.length))
         )
     }
 }

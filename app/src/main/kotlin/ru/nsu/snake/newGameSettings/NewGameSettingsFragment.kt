@@ -1,18 +1,19 @@
 package ru.nsu.snake.newGameSettings
 
-import androidx.lifecycle.ViewModelProvider
+//import androidx.navigation.safe.args.generator.*
+import android.app.Activity
 import android.os.Bundle
 import android.util.Log
+import android.view.*
+import android.view.inputmethod.InputMethodManager
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.EditText
-import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import ru.nsu.snake.Constants
-import ru.nsu.snake.R
+import ru.nsu.snake.argForFragments.ArgForNewGameToModel
 import ru.nsu.snake.databinding.FragmentNewGameSettingsBinding
+
 
 class NewGameSettingsFragment : Fragment() {
     private lateinit var viewModel: NewGameSettingsViewModel
@@ -34,9 +35,9 @@ class NewGameSettingsFragment : Fragment() {
         return binding.root
     }
 
-
     override fun onStart() {
         super.onStart()
+        println("ok?")
         viewModel = ViewModelProvider(this)[NewGameSettingsViewModel::class.java]
         confEditText()
         confButtonNext()
@@ -62,10 +63,25 @@ class NewGameSettingsFragment : Fragment() {
         }
     }
 
+
     private fun confButtonNext() {
         binding.nextSettings.setOnClickListener {
             editsTextContainer.looseFocusAtAll()
-            findNavController().navigate(R.id.action_newGameSettingsFragment_to_setupPlayerFragment)
+            viewModel.gameSpeed.postValue(viewModel.gameSpeed.value)
+            println("stop")
+
+            val args = ArgForNewGameToModel(
+                viewModel.mapWidth.value!!,
+                viewModel.mapHeight.value!!,
+                viewModel.countFood.value!!,
+                "not name",
+                viewModel.gameSpeed.value!!
+            )
+            val action =
+                NewGameSettingsFragmentDirections.actionNewGameSettingsFragmentToSetupPlayerFragment(
+                    args
+                )
+            findNavController().navigate(action)
         }
     }
 }

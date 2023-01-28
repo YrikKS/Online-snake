@@ -4,6 +4,7 @@ import ru.nsu.snake.game.model.enumsForModel.ModelNodeRole
 import ru.nsu.snake.game.model.enumsForModel.ModelPlayerType
 import ru.nsu.snake.game.model.enumsForModel.ModelSnakeStatus
 import ru.nsu.snake.game.model.gameObjects.interfaceObjects.ISnake
+import ru.nsu.snake.game.model.interfaceModel.IPlayer
 
 class Player(
     override var snake: ISnake,

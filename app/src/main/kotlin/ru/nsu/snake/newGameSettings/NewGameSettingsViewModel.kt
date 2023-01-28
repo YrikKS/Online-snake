@@ -4,24 +4,25 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.distinctUntilChanged
 import ru.nsu.snake.Constants
 import ru.nsu.snake.R
 
 class NewGameSettingsViewModel(application: Application) : AndroidViewModel(application) {
     private val initMapSize = application.getString(R.string.initial_size_map).toInt()
 
-    val mapHeight: MutableLiveData<Int> by lazy {
+    val mapHeight: MutableLiveData<Int> =
         MutableLiveData<Int>(initMapSize)
-    }
+
     val mapWidth: MutableLiveData<Int> by lazy {
         MutableLiveData<Int>(initMapSize)
     }
     val countFood: MutableLiveData<Int> by lazy {
         MutableLiveData<Int>(application.getString(R.string.initial_static_food).toInt())
     }
-    val gameSpeed: MutableLiveData<Int> by lazy {
+    val gameSpeed: MutableLiveData<Int> =
         MutableLiveData<Int>(application.getString(R.string.initial_speed_game).toInt())
-    }
+
 
     fun setMapHeight(newValue: String) {
         when (newValue.toIntOrNull()) {
